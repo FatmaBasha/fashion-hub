@@ -1,0 +1,9 @@
+Recommended production improvements:
+1. Move from SQLite to PostgreSQL.
+2. Add payment gateway integration.
+3. Add file/image uploads.
+4. Add admin dashboard pages.
+5. Add shipping fee and discount logic.
+6. Add email notifications for new orders.
+7. Add inventory alerts.
+8. Add product reviews and wishlist.

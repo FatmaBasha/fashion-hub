@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FashionHub | Simple Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="logo">FashionHub</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="#account">My Account</a>
+      </nav>
+      <div class="nav-actions">
+        <span id="welcomeText" class="welcome-text hidden"></span>
+        <button class="ghost-btn" id="loginBtn">Login</button>
+        <button class="ghost-btn hidden" id="logoutBtn">Logout</button>
+        <button class="dark-btn" id="cartOpenBtn">Cart <span id="cartCount">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">ONLINE FASHION STORE</p>
+          <h1>Simple shopping for customers. Clear control for admins.</h1>
+          <p class="hero-copy">Customers can browse, add to cart, and place real orders. Admins get a separate dashboard for products and order management.</p>
+          <div class="hero-actions">
+            <a href="#shop" class="dark-btn">Shop Now</a>
+            <a href="#account" class="ghost-btn">Open Account</a>
+          </div>
+        </div>
+        <div class="hero-card">
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80" alt="Fashion" />
+        </div>
+      </div>
+    </section>
+
+    <section class="shop-section container" id="shop">
+      <div class="section-head inline-head">
+        <div>
+          <p class="eyebrow">SHOP</p>
+          <h2>Products</h2>
+        </div>
+        <div class="filters">
+          <select id="categoryFilter">
+            <option value="">All Categories</option>
+            <option value="Women">Women</option>
+            <option value="Men">Men</option>
+            <option value="Kids">Kids</option>
+          </select>
+          <input id="searchInput" type="text" placeholder="Search products" />
+          <button class="dark-btn" id="filterBtn">Apply</button>
+        </div>
+      </div>
+      <div id="productGrid" class="product-grid"></div>
+    </section>
+
+    <section class="account-section container" id="account">
+      <div class="section-head">
+        <p class="eyebrow">ACCOUNT</p>
+        <h2 id="accountHeading">My Account</h2>
+        <p class="muted" id="accountSubheading">Login to see your account area.</p>
+      </div>
+
+      <div class="card-panel" id="guestView">
+        <h3>Login required</h3>
+        <p>Customers can place orders and track them here. Admins can manage products and orders from a separate panel.</p>
+        <button class="dark-btn" id="guestLoginBtn">Login</button>
+      </div>
+
+      <div id="customerSection" class="hidden">
+        <div class="stats-grid customer-stats">
+          <article class="stat-card"><span>Total Orders</span><strong id="customerOrdersCount">0</strong></article>
+          <article class="stat-card"><span>Pending</span><strong id="customerPendingCount">0</strong></article>
+          <article class="stat-card"><span>Completed</span><strong id="customerCompletedCount">0</strong></article>
+        </div>
+
+        <div class="split-grid">
+          <section class="card-panel">
+            <h3>Profile</h3>
+            <div id="customerProfile"></div>
+          </section>
+          <section class="card-panel">
+            <h3>My Orders</h3>
+            <div id="customerOrders"></div>
+          </section>
+        </div>
+      </div>
+
+      <div id="adminSection" class="hidden">
+        <div class="stats-grid">
+          <article class="stat-card"><span>Total Sales</span><strong id="statSales">$0.00</strong></article>
+          <article class="stat-card"><span>Total Orders</span><strong id="statOrders">0</strong></article>
+          <article class="stat-card"><span>Total Products</span><strong id="statProducts">0</strong></article>
+          <article class="stat-card"><span>Total Customers</span><strong id="statCustomers">0</strong></article>
+        </div>
+
+        <div class="split-grid admin-grid">
+          <section class="card-panel">
+            <div class="panel-head">
+              <h3>Products</h3>
+              <button class="ghost-btn" id="toggleProductFormBtn">Add Product</button>
+            </div>
+
+            <form id="productForm" class="admin-form hidden">
+              <input type="hidden" id="productId" />
+              <input id="productName" placeholder="Product name" required />
+              <input id="productCategory" placeholder="Category" required />
+              <input id="productPrice" type="number" min="0" step="0.01" placeholder="Price" required />
+              <input id="productStock" type="number" min="0" step="1" placeholder="Stock" required />
+              <input id="productImage" placeholder="Image URL" required />
+              <textarea id="productDescription" placeholder="Description" required></textarea>
+              <label class="checkbox-row"><input type="checkbox" id="productFeatured" /> Featured</label>
+              <div class="form-actions">
+                <button type="submit" class="dark-btn">Save Product</button>
+                <button type="button" class="ghost-btn" id="cancelProductEditBtn">Cancel</button>
+              </div>
+            </form>
+
+            <div id="adminProducts"></div>
+          </section>
+
+          <section class="card-panel">
+            <h3>Orders</h3>
+            <div id="adminOrders"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>FashionHub</h3>
+        <p>Clean online shopping experience for clothing stores.</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>support@fashionhub.com</p>
+      </div>
+      <div>
+        <h4>Payments</h4>
+        <p>Cash on Delivery</p>
+        <p>InstaPay / Vodafone Cash</p>
+      </div>
+    </div>
+  </footer>
+
+  <aside class="drawer" id="cartDrawer">
+    <div class="drawer-header">
+      <h3>Your Cart</h3>
+      <button id="closeCartBtn">✕</button>
+    </div>
+    <div id="cartItems" class="drawer-body"></div>
+    <div class="drawer-footer">
+      <p>Total: <strong id="cartTotal">$0.00</strong></p>
+      <button class="dark-btn full-btn" id="checkoutBtn">Place Order</button>
+    </div>
+  </aside>
+
+  <div class="modal hidden" id="authModal">
+    <div class="modal-card">
+      <button class="close-modal" id="closeAuthModal">✕</button>
+      <h3>Login</h3>
+      <p>Sign in to continue shopping or manage the store.</p>
+      <form id="loginForm">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit" class="dark-btn full-btn">Login</button>
+        <button type="button" class="ghost-btn full-btn secondary-btn" id="openRegisterModalBtn">Create Account</button>
+      </form>
+      <small id="authMessage"></small>
+    </div>
+  </div>
+
+  <div class="modal hidden" id="checkoutModal">
+    <div class="modal-card">
+      <button class="close-modal" id="closeCheckoutModal">✕</button>
+      <h3>Complete Your Order</h3>
+      <p>Fill your delivery details to place the order.</p>
+      <form id="checkoutForm">
+        <div class="checkout-grid">
+          <input type="text" id="checkoutName" placeholder="Full name" required />
+          <input type="text" id="checkoutPhone" placeholder="Phone number" required />
+        </div>
+        <textarea id="checkoutAddress" placeholder="Delivery address" required></textarea>
+        <select id="checkoutPaymentMethod" required>
+          <option value="">Select payment method</option>
+          <option value="Cash on Delivery">Cash on Delivery</option>
+          <option value="InstaPay">InstaPay</option>
+          <option value="Vodafone Cash">Vodafone Cash</option>
+        </select>
+        <button type="submit" class="dark-btn full-btn">Confirm Order</button>
+      </form>
+      <small id="checkoutMessage"></small>
+    </div>
+  </div>
+
+
+  <div class="modal hidden" id="registerModal">
+    <div class="modal-card">
+      <button class="close-modal" id="closeRegisterModal">✕</button>
+      <h3>Create Customer Account</h3>
+      <p>Create your customer account to place orders and track them from your account.</p>
+      <form id="registerForm">
+        <input type="text" id="registerName" placeholder="Full name" required />
+        <input type="email" id="registerEmail" placeholder="Email" required />
+        <input type="password" id="registerPassword" placeholder="Password" required />
+        <button type="submit" class="dark-btn full-btn">Create Account</button>
+      </form>
+      <small id="registerMessage"></small>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
