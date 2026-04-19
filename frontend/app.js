@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://fashion-hub-production.up.railway.app/api';
 
 const state = {
   token: localStorage.getItem('fashionhub_token') || '',
